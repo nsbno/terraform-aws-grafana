@@ -3,6 +3,11 @@ variable "certificate_arn" {
   type        = string
 }
 
+variable "grafana_aws_env_img" {
+  description = "Which grafana-aws-env docker image to use"
+  default = "teliaoss/grafana-aws-env:5.4.3"
+}
+
 variable "name_prefix" {
   description = "Typically the name of the application. This value is used as a prefix to the name of most resources created including the public URL"
   type        = string

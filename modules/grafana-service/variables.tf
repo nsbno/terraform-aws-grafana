@@ -22,6 +22,11 @@ variable "private_subnet_ids" {
   type        = list(string)
 }
 
+variable "grafana_aws_env_img" {
+  description = "Which grafana-aws-env docker image to use"
+  default = "teliaoss/grafana-aws-env:5.4.3"
+}
+
 variable "snapshot_identifier" {
   description = "The identifier of the snapshot to create the database from - if left empty a new db will be created"
   type        = string
