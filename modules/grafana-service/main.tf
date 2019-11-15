@@ -46,7 +46,7 @@ module "grafana-service" {
   name_prefix             = var.name_prefix
   vpc_id                  = var.vpc_id
   cluster_id              = var.cluster_id
-  task_container_image    = "teliaoss/grafana-aws-env:5.4.3"
+  task_container_image    = var.grafana_aws_env_img
   task_container_port     = 3000
   task_container_protocol = "HTTP"
 
