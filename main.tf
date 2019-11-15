@@ -67,6 +67,7 @@ module "grafana-service" {
   rds_instance_storage   = var.rds_instance_storage
   snapshot_identifier    = var.snapshot_identifier
   tags                   = var.tags
+  grafana_aws_env_img    = var.grafana_aws_env_img
 }
 
 # ----------------------------------------
