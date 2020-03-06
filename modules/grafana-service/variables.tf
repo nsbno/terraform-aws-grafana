@@ -24,7 +24,7 @@ variable "private_subnet_ids" {
 
 variable "grafana_aws_env_img" {
   description = "Which grafana-aws-env docker image to use"
-  default = "teliaoss/grafana-aws-env:5.4.3"
+  default     = "teliaoss/grafana-aws-env:5.4.3"
 }
 
 variable "snapshot_identifier" {
