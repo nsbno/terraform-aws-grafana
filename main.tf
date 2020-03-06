@@ -71,22 +71,6 @@ module "grafana-service" {
 }
 
 # ----------------------------------------
-# Route53 Record
-# ----------------------------------------
-data "aws_route53_zone" "aws_route53_zone" {
-  name         = var.route53_zone
-  private_zone = false
-}
-
-resource "aws_route53_record" "grafana" {
-  zone_id = data.aws_route53_zone.aws_route53_zone.id
-  name    = "${var.name_prefix}.${data.aws_route53_zone.aws_route53_zone.name}"
-  type    = "CNAME"
-  ttl     = 300
-  records = [module.lb.dns_name]
-}
-
-# ----------------------------------------
 # Security Group Rules
 # ----------------------------------------
 resource "aws_security_group_rule" "lb_grafana_ingress_rule" {
