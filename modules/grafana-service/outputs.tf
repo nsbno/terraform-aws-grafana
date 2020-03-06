@@ -16,3 +16,7 @@ output "task_role_name" {
   value       = module.grafana-service.task_role_name
 }
 
+output "url" {
+  description = "The url of the grafana service"
+  value = "https://${aws_route53_record.grafana.fqdn}"
+}
