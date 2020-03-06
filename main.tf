@@ -1,13 +1,23 @@
 # ----------------------------------------
 # VPC
 # ----------------------------------------
+data "aws_availability_zones" "main" {}
+locals {
+  vpc_cidr_block = "10.11.0.0/16"
+  public_cidr_blocks = [for k, v in data.aws_availability_zones.main.names :
+  cidrsubnet(local.vpc_cidr_block, 4, k)]
+  private_cidr_blocks = [for k, v in data.aws_availability_zones.main.zone_ids :
+  cidrsubnet(local.vpc_cidr_block, 4, k + length(data.aws_availability_zones.main.names))]
+}
 module "vpc" {
-  source  = "telia-oss/vpc/aws"
-  version = "0.1.0"
-
+  source               = "telia-oss/vpc/aws"
+  version              = "3.0.1"
   name_prefix          = var.name_prefix
   cidr_block           = "10.11.0.0/16"
-  private_subnet_count = var.private_subnet_count
+  availability_zones   = data.aws_availability_zones.main.names
+  public_subnet_cidrs  = local.public_cidr_blocks
+  private_subnet_cidrs = local.private_cidr_blocks
+  create_nat_gateways  = true
   enable_dns_hostnames = true
   tags                 = var.tags
 }
