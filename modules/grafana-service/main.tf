@@ -38,7 +38,7 @@ module "grafana_rds" {
 # Grafana ECS Fargate Service
 # ----------------------------------------
 module "grafana-service" {
-  source  = "github.com/nsbno/terraform-aws-ecs-fargate?ref=0682dae"
+  source  = "github.com/nsbno/terraform-aws-ecs-fargate?ref=1f6ee5d"
   name_prefix             = var.name_prefix
   vpc_id                  = var.vpc_id
   cluster_id              = var.cluster_id
