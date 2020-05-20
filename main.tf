@@ -1,10 +1,18 @@
 # ----------------------------------------
 # VPC
 # ----------------------------------------
+data "aws_availability_zones" "main" {}
+locals {
+  public_cidr_blocks = [for k, v in data.aws_availability_zones.main.names :
+  cidrsubnet(var.vpc_cidr_block, 4, k)]
+  private_cidr_blocks = [for k, v in chunklist(data.aws_availability_zones.main.zone_ids, var.private_subnet_count)[0] :
+  cidrsubnet(var.vpc_cidr_block, 4, k + length(data.aws_availability_zones.main.names))]
+}
+
 module "vpc" {
   source  = "github.com/nsbno/terraform-aws-vpc?ref=ec7f57f"
   name_prefix          = var.name_prefix
-  cidr_block           = "10.11.0.0/16"
+  cidr_block           = var.vpc_cidr_block
   private_subnet_count = var.private_subnet_count
   enable_dns_hostnames = true
   tags                 = var.tags
