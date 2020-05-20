@@ -2,9 +2,7 @@
 # VPC
 # ----------------------------------------
 module "vpc" {
-  source  = "telia-oss/vpc/aws"
-  version = "0.1.0"
-
+  source  = "github.com/nsbno/terraform-aws-vpc?ref=ec7f57f"
   name_prefix          = var.name_prefix
   cidr_block           = "10.11.0.0/16"
   private_subnet_count = var.private_subnet_count
@@ -23,9 +21,7 @@ resource "aws_ecs_cluster" "cluster" {
 # ALB Listener
 # ----------------------------------------
 module "lb" {
-  source  = "telia-oss/loadbalancer/aws"
-  version = "3.0.0"
-
+  source  = "github.com/nsbno/terraform-aws-loadbalancer?ref=a8cf4b8"
   name_prefix = var.name_prefix
   type        = "application"
   internal    = false

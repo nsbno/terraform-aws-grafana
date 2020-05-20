@@ -17,9 +17,7 @@ data "aws_ssm_parameter" "grafana_rds_password" {
 }
 
 module "grafana_rds" {
-  source  = "telia-oss/rds-instance/aws"
-  version = "3.0.0"
-
+  source  = "github.com/nsbno/terraform-aws-rds-instance?ref=7e38055"
   name_prefix         = var.name_prefix
   username            = data.aws_ssm_parameter.grafana_rds_username.value
   password            = data.aws_ssm_parameter.grafana_rds_password.value
@@ -40,9 +38,7 @@ module "grafana_rds" {
 # Grafana ECS Fargate Service
 # ----------------------------------------
 module "grafana-service" {
-  source  = "telia-oss/ecs-fargate/aws"
-  version = "3.1.0"
-
+  source  = "github.com/nsbno/terraform-aws-ecs-fargate?ref=e6bf17f"
   name_prefix             = var.name_prefix
   vpc_id                  = var.vpc_id
   cluster_id              = var.cluster_id
