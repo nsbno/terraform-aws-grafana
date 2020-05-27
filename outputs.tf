@@ -1,4 +1,4 @@
 output "url" {
-  value = "https://${module.grafana-service.url}"
+  value = module.grafana-service.url
 }
 
