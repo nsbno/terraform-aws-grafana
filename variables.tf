@@ -54,7 +54,7 @@ variable "task_definition_memory" {
 variable "rds_instance_type" {
   description = "The db instance type to be used for the database"
   type        = string
-  default     = "db.t2.small"
+  default     = "db.t3.small"
 }
 
 variable "rds_instance_storage" {
