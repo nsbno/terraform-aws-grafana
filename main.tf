@@ -13,7 +13,10 @@ module "vpc" {
   source  = "github.com/nsbno/terraform-aws-vpc?ref=ec7f57f"
   name_prefix          = var.name_prefix
   cidr_block           = var.vpc_cidr_block
+  public_subnet_cidrs  = local.public_cidr_blocks
+  private_subnet_cidrs = local.private_cidr_blocks
   enable_dns_hostnames = true
+  create_nat_gateways  = true
   tags                 = var.tags
 }
 
