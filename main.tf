@@ -1,14 +1,22 @@
 # ----------------------------------------
 # VPC
 # ----------------------------------------
-module "vpc" {
-  source  = "telia-oss/vpc/aws"
-  version = "0.1.0"
+data "aws_availability_zones" "main" {}
+locals {
+  public_cidr_blocks = [for k, v in data.aws_availability_zones.main.names :
+  cidrsubnet(var.vpc_cidr_block, 4, k)]
+  private_cidr_blocks = [for k, v in chunklist(data.aws_availability_zones.main.zone_ids, var.private_subnet_count)[0] :
+  cidrsubnet(var.vpc_cidr_block, 4, k + length(data.aws_availability_zones.main.names))]
+}
 
+module "vpc" {
+  source  = "github.com/nsbno/terraform-aws-vpc?ref=ec7f57f"
   name_prefix          = var.name_prefix
-  cidr_block           = "10.11.0.0/16"
-  private_subnet_count = var.private_subnet_count
+  cidr_block           = var.vpc_cidr_block
+  public_subnet_cidrs  = local.public_cidr_blocks
+  private_subnet_cidrs = local.private_cidr_blocks
   enable_dns_hostnames = true
+  create_nat_gateways  = true
   tags                 = var.tags
 }
 
@@ -23,9 +31,7 @@ resource "aws_ecs_cluster" "cluster" {
 # ALB Listener
 # ----------------------------------------
 module "lb" {
-  source  = "telia-oss/loadbalancer/aws"
-  version = "3.0.0"
-
+  source  = "github.com/nsbno/terraform-aws-loadbalancer?ref=a8cf4b8"
   name_prefix = var.name_prefix
   type        = "application"
   internal    = false
