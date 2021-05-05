@@ -6,6 +6,14 @@ output "target_group_arn" {
   value       = module.grafana-service.target_group_arn
 }
 
+output "target_group_arn_suffix" {
+  value = module.grafana-service.target_group_arn_suffix
+}
+
+output "target_group_name" {
+  value = module.grafana-service.target_group_name
+}
+
 output "service_sg_id" {
   description = "The Amazon Resource Name (ARN) that identifies the service security group."
   value       = module.grafana-service.service_sg_id
