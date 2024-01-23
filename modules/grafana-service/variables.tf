@@ -93,3 +93,8 @@ variable "engine_version" {
   description = "The version of the database engine to use"
   type        = string
 }
+
+variable "allow_major_version_upgrade" {
+  description = "Allow major version upgrades. Needed to upgrade major engine_version"
+  type        = bool
+}

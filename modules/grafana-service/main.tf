@@ -17,22 +17,23 @@ data "aws_ssm_parameter" "grafana_rds_password" {
 }
 
 module "grafana_rds" {
-  source              = "github.com/nsbno/terraform-aws-rds-instance?ref=b88aef5"
-  name_prefix         = var.name_prefix
-  username            = data.aws_ssm_parameter.grafana_rds_username.value
-  password            = data.aws_ssm_parameter.grafana_rds_password.value
-  database_name       = "grafana"
-  subnet_ids          = var.private_subnet_ids
-  vpc_id              = var.vpc_id
-  port                = 5432
-  engine              = "postgres"
-  engine_version      = var.engine_version
-  instance_type       = var.rds_instance_type
-  allocated_storage   = var.rds_instance_storage
-  multi_az            = false
-  skip_final_snapshot = false
-  snapshot_identifier = var.snapshot_identifier
-  tags                = var.tags
+  source                      = "github.com/nsbno/terraform-aws-rds-instance?ref=b88aef5"
+  name_prefix                 = var.name_prefix
+  username                    = data.aws_ssm_parameter.grafana_rds_username.value
+  password                    = data.aws_ssm_parameter.grafana_rds_password.value
+  database_name               = "grafana"
+  subnet_ids                  = var.private_subnet_ids
+  vpc_id                      = var.vpc_id
+  port                        = 5432
+  engine                      = "postgres"
+  engine_version              = var.engine_version
+  allow_major_version_upgrade = var.allow_major_version_upgrade
+  instance_type               = var.rds_instance_type
+  allocated_storage           = var.rds_instance_storage
+  multi_az                    = false
+  skip_final_snapshot         = false
+  snapshot_identifier         = var.snapshot_identifier
+  tags                        = var.tags
 }
 
 # ----------------------------------------
