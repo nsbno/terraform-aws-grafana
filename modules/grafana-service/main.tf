@@ -17,7 +17,7 @@ data "aws_ssm_parameter" "grafana_rds_password" {
 }
 
 module "grafana_rds" {
-  source  = "github.com/nsbno/terraform-aws-rds-instance?ref=7e38055"
+  source              = "github.com/nsbno/terraform-aws-rds-instance?ref=b88aef5"
   name_prefix         = var.name_prefix
   username            = data.aws_ssm_parameter.grafana_rds_username.value
   password            = data.aws_ssm_parameter.grafana_rds_password.value
@@ -26,6 +26,7 @@ module "grafana_rds" {
   vpc_id              = var.vpc_id
   port                = 5432
   engine              = "postgres"
+  engine_version      = var.engine_version
   instance_type       = var.rds_instance_type
   allocated_storage   = var.rds_instance_storage
   multi_az            = false
@@ -38,7 +39,7 @@ module "grafana_rds" {
 # Grafana ECS Fargate Service
 # ----------------------------------------
 module "grafana-service" {
-  source  = "github.com/nsbno/terraform-aws-ecs-fargate?ref=f95a734"
+  source                  = "github.com/nsbno/terraform-aws-ecs-fargate?ref=f95a734"
   name_prefix             = var.name_prefix
   vpc_id                  = var.vpc_id
   cluster_id              = var.cluster_id

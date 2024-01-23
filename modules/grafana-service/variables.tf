@@ -89,3 +89,7 @@ variable "route53_zone" {
   type        = string
 }
 
+variable "engine_version" {
+  description = "The version of the database engine to use"
+  type        = string
+}
