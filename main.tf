@@ -74,6 +74,7 @@ module "grafana-service" {
   snapshot_identifier    = var.snapshot_identifier
   tags                   = var.tags
   grafana_aws_env_img    = var.grafana_aws_env_img
+  engine_version         = var.engine_version
 }
 
 # ----------------------------------------

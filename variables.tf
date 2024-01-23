@@ -65,6 +65,11 @@ variable "rds_instance_storage" {
 
 variable "vpc_cidr_block" {
   description = "The cidr block for the VPC to launch this into"
-  type = string
-  default = "10.11.0.0/16"
+  type        = string
+  default     = "10.11.0.0/16"
+}
+
+variable "engine_version" {
+  description = "The version of the database engine to use"
+  type        = string
 }
