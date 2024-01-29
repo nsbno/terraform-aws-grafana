@@ -62,6 +62,7 @@ module "grafana-service" {
     "GF_AUTH_GITHUB_CLIENT_SECRET"         = "ssm:///${var.name_prefix}/github-client-secret"
     "GF_AUTH_GITHUB_ALLOWED_ORGANISATIONS" = "ssm:///${var.name_prefix}/github-allowed-organisations"
     "GF_AUTH_GITHUB_ALLOW_SIGN_UP"         = "true"
+    "GF_DATABASE_SSL_MODE"                 = "require"
   }
 
   task_definition_cpu               = var.task_definition_cpu
