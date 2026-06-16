@@ -99,3 +99,9 @@ variable "allow_major_version_upgrade" {
   description = "Allow major version upgrades. Needed to upgrade major engine_version"
   type        = bool
 }
+
+variable "ca_cert_identifier" {
+  description = "The identifier of the CA certificate for the DB instance."
+  type        = string
+  default     = "rds-ca-rsa2048-g1"
+}

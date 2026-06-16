@@ -80,6 +80,7 @@ module "grafana-service" {
   grafana_aws_env_img         = var.grafana_aws_env_img
   engine_version              = var.engine_version
   allow_major_version_upgrade = var.allow_major_version_upgrade
+  ca_cert_identifier          = var.ca_cert_identifier
 }
 
 # ----------------------------------------

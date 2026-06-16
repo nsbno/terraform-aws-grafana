@@ -30,6 +30,7 @@ module "grafana_rds" {
   allow_major_version_upgrade = var.allow_major_version_upgrade
   instance_type               = var.rds_instance_type
   allocated_storage           = var.rds_instance_storage
+  ca_cert_identifier          = var.ca_cert_identifier
   multi_az                    = false
   skip_final_snapshot         = false
   snapshot_identifier         = var.snapshot_identifier

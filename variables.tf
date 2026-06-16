@@ -80,3 +80,9 @@ variable "allow_major_version_upgrade" {
   type        = bool
   default     = false
 }
+
+variable "ca_cert_identifier" {
+  description = "The identifier of the CA certificate for the DB instance. Defaults to rds-ca-rsa2048-g1. The previous module default was rds-ca-2019; set this explicitly if you need to keep the old certificate."
+  type        = string
+  default     = "rds-ca-rsa2048-g1"
+}
