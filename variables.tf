@@ -31,7 +31,8 @@ variable "route53_zone" {
 variable "snapshot_identifier" {
   description = "The identifier of the snapshot to create the database from - if left empty a new db will be created"
   type        = string
-  default     = ""
+  nullable    = true
+  default     = null
 }
 
 variable "tags" {
